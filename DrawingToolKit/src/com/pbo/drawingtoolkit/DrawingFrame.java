@@ -42,7 +42,8 @@ public class DrawingFrame extends JFrame {
 		toolboxPanel.add(jbClear);
 		toolboxPanel.add(jbCircle);
 		toolboxPanel.add(jbLine);
-
+		toolboxPadding.add(toolboxPanel);
+		
 		add(toolboxPadding, BorderLayout.NORTH);
 		add(canvas, BorderLayout.CENTER);
 		

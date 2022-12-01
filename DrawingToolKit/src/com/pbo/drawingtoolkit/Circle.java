@@ -22,5 +22,4 @@ public class Circle extends DrawingObjectBounds{
 		
 		g.drawOval(getUpperLeftX(), getUpperLeftY(), circleWidth, circleHeight);
 	}
-
 }
