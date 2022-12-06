@@ -45,6 +45,7 @@ public class DrawingFrame extends JFrame {
 		toolboxPanel.add(jbCircle);
 		toolboxPanel.add(jbRectangle);
 		toolboxPanel.add(jbSelection);
+		
 		toolboxPadding.add(toolboxPanel);
 
 		add(toolboxPadding, BorderLayout.NORTH);
@@ -55,6 +56,7 @@ public class DrawingFrame extends JFrame {
 		jbLine.addActionListener(bHandler);
 		jbCircle.addActionListener(bHandler);
 		jbRectangle.addActionListener(bHandler);
+		jbSelection.addActionListener(bHandler);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
@@ -84,14 +86,14 @@ public class DrawingFrame extends JFrame {
 			} else if (e.getActionCommand().equals("Select")) {
 				canvas.setSelectionMode(true);
 			} else if (e.getActionCommand().equals("Line")) {
-				canvas.setSelectionMode(false);
 				canvas.setCurrentShapeType(0);
+				canvas.setSelectionMode(false);
 			} else if (e.getActionCommand().equals("Circle")) {
-				canvas.setSelectionMode(false);
 				canvas.setCurrentShapeType(1);
-			} else if (e.getActionCommand().equals("Rectangle")) {
 				canvas.setSelectionMode(false);
+			} else if (e.getActionCommand().equals("Rectangle")) {
 				canvas.setCurrentShapeType(2);
+				canvas.setSelectionMode(false);
 			}
 		}
 

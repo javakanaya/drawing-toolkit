@@ -24,5 +24,21 @@ public abstract class DrawingObjectBounds extends DrawingObject {
 	public int getHeight() {
 		return Math.abs(getY1()- getY2());
 	}
+	
+	public void setFixedXY() {
+		if(getX1() > getX2()) {
+			int temp = getX1();
+			setX1(getX2());
+			setX2(temp);
+		}
+		if(getY1() > getY2()) {
+			int temp = getY1();
+			setY1(getY2());
+			setY2(temp);
+		}
+//		System.out.println(getX1() + " " + getY1());
+//		System.out.println(getX2() + " " + getY2());
+	}
+	
 
 }

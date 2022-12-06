@@ -2,6 +2,7 @@ package com.pbo.dynamicdrawingtoolkit;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 public abstract class DrawingObject {
 
@@ -29,19 +30,6 @@ public abstract class DrawingObject {
 		this.color = color;
 	}
 	
-	public void setFixedXY() {
-		if(x1 > x2) {
-			int temp = x1;
-			x1 = x2;
-			x2 = temp; 
-		}
-		if(y1 > y2) {
-			int temp = y1;
-			y1 = y2;
-			y2 = temp; 
-		}
-	}
-
 	// Setter
 	public void setX1(int x1) {
 		this.x1 = x1;
@@ -61,6 +49,11 @@ public abstract class DrawingObject {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+	
+	public void setRandColor() {
+		Random rand = new Random();
+		this.color = new Color(rand.nextInt(5, 120), rand.nextInt(4, 225), rand.nextInt(1, 200));
 	}
 
 	// Getter
@@ -84,5 +77,14 @@ public abstract class DrawingObject {
 		return color;
 	}
 
+	public void objectTranslation(int deltaX, int deltaY) {
+		x1 += deltaX;
+		x2 += deltaX;
+		y1 += deltaY;
+		y2 += deltaY;
+	}
+	
 	abstract public void draw(Graphics g);
+	abstract public boolean intersect(int mouseX, int mouseY);
+	public abstract void setFixedXY();
 }

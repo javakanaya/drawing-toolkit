@@ -18,8 +18,24 @@ public class Circle extends DrawingObjectBounds {
 	@Override
 	public void draw(Graphics g) {
 		diameter = Math.max(getWidth(), getHeight());
-		
+		g.setColor(getColor());
 		g.drawOval(getUpperLeftX(), getUpperLeftY(), diameter, diameter);
+		g.fillOval(getUpperLeftX(), getUpperLeftY(), diameter, diameter);
 	}
+
+	@Override
+	public boolean intersect(int mouseX, int mouseY) {
+		if ((mouseX >= getX1() && mouseX <= getX2() && mouseY >= getY1() && mouseY <= getY2()) ||
+
+				(mouseX >= getX1() && mouseX <= getX2() && mouseY <= getY1() && mouseY >= getY2()) ||
+
+				(mouseX <= getX1() && mouseX >= getX2() && mouseY >= getY1() && mouseY <= getY2()) ||
+
+				(mouseX <= getX1() && mouseX >= getX2() && mouseY <= getY1() && mouseY >= getY2())) {
+			return true;
+		}
+		return false;
+	}
+
 
 }

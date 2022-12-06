@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,13 +19,14 @@ public class DrawingCanvas extends JPanel {
 	private boolean selectionMode;
 	private DrawingObject currentShapeObject;
 	private Color currentShapeColor;
+	private int prevX, prevY;
 
 	JLabel statusLabel;
 
 	public DrawingCanvas(JLabel statusLabel) {
 		myShapes = new ArrayList<DrawingObject>();
 		currentShapeType = 0;
-		selectionMode = true;
+		selectionMode = false;
 		currentShapeObject = null;
 		currentShapeColor = Color.BLACK;
 
@@ -42,10 +44,10 @@ public class DrawingCanvas extends JPanel {
 		super.paintComponent(g);
 
 		// menggambar semua objek didalam arrayList
-		for (int counter = myShapes.size() - 1; counter >= 0; counter--) {
-			myShapes.get(counter).draw(g);
+		for (DrawingObject shape : myShapes) {
+			if (shape != null)
+				shape.draw(g);
 		}
-
 		if (currentShapeObject != null) {
 			currentShapeObject.draw(g);
 		}
@@ -69,14 +71,18 @@ public class DrawingCanvas extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			if (selectionMode == true) {
+				prevX = e.getX();
+				prevY = e.getY();
 				for (DrawingObject shape : myShapes) {
-					if ((e.getX() >= shape.getX1() && e.getX() <= shape.getX2())
-							&& (e.getY() >= shape.getY1() && e.getX() <= shape.getY2())) {
+					if (shape != null && shape.intersect(prevX, prevY)) {
 						currentShapeObject = shape;
+						myShapes.remove(shape);
+						System.out.println("detected");
+						repaint();
+						break;
 					}
 				}
 			} else {
-
 				switch (currentShapeType) {
 				case 0:
 					currentShapeObject = new Line(e.getX(), e.getY(), e.getX(), e.getY(), currentShapeColor);
@@ -94,41 +100,39 @@ public class DrawingCanvas extends JPanel {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			if (selectionMode == true) {
-
-			} else {
+			if (selectionMode == true && currentShapeObject != null) {
+				int deltaX = e.getX() - prevX;
+				int deltaY = e.getY() - prevY;
+				currentShapeObject.objectTranslation(deltaX, deltaY);
+				prevX = e.getX();
+				prevY = e.getY();
+			} else if (currentShapeObject != null) {
 				// update ukuran objek ketika mouse bergerak
 				currentShapeObject.setX2(e.getX());
 				currentShapeObject.setY2(e.getY());
-
-				repaint();
 			}
+			repaint();
 		}
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			if (selectionMode == true) {
-
+				myShapes.add(currentShapeObject);
+				currentShapeObject = null;
 			} else {
 				// update ukuran objek ketika mouse bergerak
 				currentShapeObject.setX2(e.getX());
 				currentShapeObject.setY2(e.getY());
 
+				currentShapeObject.setRandColor();
 				currentShapeObject.setFixedXY();
 				System.out.println(myShapes.toArray());
-//				System.out.println(currentShapeObject.getX1()+ " " + currentShapeObject.getY1());
-//				System.out.println(currentShapeObject.getX2()+ " " + currentShapeObject.getY2());
+				
 				// menyimpan objek kedalam arrayList
 				myShapes.add(currentShapeObject);
-
 				currentShapeObject = null;
-				repaint();
 			}
-		}
-
-		@Override
-		public void mouseMoved(MouseEvent e) {
-
+			repaint();
 		}
 	}
 }
