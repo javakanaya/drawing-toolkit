@@ -1,9 +1,9 @@
-package com.pbo.drawingtoolkit;
+package com.pbo.dynamicdrawingtoolkit;
 
 import java.awt.Color;
 
-public abstract class DrawingObjectBounds extends DrawingObject{
-	
+public abstract class DrawingObjectBounds extends DrawingObject {
+
 	public DrawingObjectBounds() {
 		super();
 	}
@@ -15,16 +15,14 @@ public abstract class DrawingObjectBounds extends DrawingObject{
 	public int getUpperLeftX() {
 		return Math.min(getX1(), getX2());
 	}
-	
 	public int getUpperLeftY() {
 		return Math.min(getY1(), getY2());
 	}
-	
 	public int getWidth() {
-		return Math.abs(getX1() - getX2());
+		return Math.abs(getX1()- getX2());
 	}
-	
 	public int getHeight() {
-		return Math.abs(getY1() - getY2());
+		return Math.abs(getY1()- getY2());
 	}
+
 }

@@ -1,22 +1,26 @@
-package com.pbo.drawingtoolkit;
+package com.pbo.dynamicdrawingtoolkit;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 public abstract class DrawingObject {
-
+	
+	// koordinat objek
 	private int x1, y1, x2, y2;
+	
+	// warna 
 	private Color color;
+	
 	public boolean reverse = false;
-
+	
 	public DrawingObject() {
 		x1 = 0;
-		y2 = 0;
+		y1 = 0;
 		x2 = 0;
 		y2 = 0;
-		color = color.BLACK;
+		color = Color.BLACK;
 	}
-
+	
 	public DrawingObject(int x1, int y1, int x2, int y2, Color color) {
 		this.x1 = x1;
 		this.y1 = y1;
@@ -25,6 +29,7 @@ public abstract class DrawingObject {
 		this.color = color;
 	}
 	
+	// Setter
 	public void setX1(int x1) {
 		this.x1 = x1;
 	}
@@ -41,6 +46,7 @@ public abstract class DrawingObject {
 		this.color = color;
 	}
 	
+	// Getter
 	public int getX1() {
 		return x1;
 	}
