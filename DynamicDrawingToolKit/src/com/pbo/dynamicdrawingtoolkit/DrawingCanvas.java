@@ -69,6 +69,9 @@ public class DrawingCanvas extends JPanel {
 			case 1:
 				currentShapeObject = new Circle(e.getX(), e.getY(), e.getX(), e.getY(), currentShapeColor, false);
 				break;
+			case 2:
+				currentShapeObject = new Rectangle(e.getX(), e.getY(), e.getX(), e.getY(), currentShapeColor, false);
+				break;
 			}
 		}
 		

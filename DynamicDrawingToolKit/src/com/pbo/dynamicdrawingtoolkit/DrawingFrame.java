@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 public class DrawingFrame extends JFrame {
 
-	private JButton jbLine, jbCircle, jbClear;
+	private JButton jbClear, jbLine, jbCircle, jbRectangle;
 	private JPanel toolboxPanel, toolboxPadding;
 	public static DrawingCanvas canvas;
 
@@ -32,6 +32,7 @@ public class DrawingFrame extends JFrame {
 		jbClear = new JButton("Clear");
 		jbLine = new JButton("Line");
 		jbCircle = new JButton("Circle");
+		jbRectangle = new JButton("Rectangle");
 
 		toolboxPanel = new JPanel();
 		toolboxPanel.setLayout(new GridLayout(1, 1, 1, 1));
@@ -41,6 +42,7 @@ public class DrawingFrame extends JFrame {
 		toolboxPanel.add(jbClear);
 		toolboxPanel.add(jbLine);
 		toolboxPanel.add(jbCircle);
+		toolboxPanel.add(jbRectangle);
 		toolboxPadding.add(toolboxPanel);
 
 		add(toolboxPadding, BorderLayout.NORTH);
@@ -50,6 +52,7 @@ public class DrawingFrame extends JFrame {
 		jbClear.addActionListener(bHandler);
 		jbLine.addActionListener(bHandler);
 		jbCircle.addActionListener(bHandler);
+		jbRectangle.addActionListener(bHandler);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
@@ -80,6 +83,8 @@ public class DrawingFrame extends JFrame {
 				canvas.setCurrentShapeType(0);
 			} else if (e.getActionCommand().equals("Circle")) {
 				canvas.setCurrentShapeType(1);
+			} else if (e.getActionCommand().equals("Rectangle")) {
+				canvas.setCurrentShapeType(2);
 			}
 		}
 
