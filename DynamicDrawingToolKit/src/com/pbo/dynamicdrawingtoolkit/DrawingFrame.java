@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 public class DrawingFrame extends JFrame {
 
-	private JButton jbClear, jbLine, jbCircle, jbRectangle;
+	private JButton jbClear, jbLine, jbCircle, jbRectangle, jbSelection;
 	private JPanel toolboxPanel, toolboxPadding;
 	public static DrawingCanvas canvas;
 
@@ -33,6 +33,7 @@ public class DrawingFrame extends JFrame {
 		jbLine = new JButton("Line");
 		jbCircle = new JButton("Circle");
 		jbRectangle = new JButton("Rectangle");
+		jbSelection = new JButton("Select");
 
 		toolboxPanel = new JPanel();
 		toolboxPanel.setLayout(new GridLayout(1, 1, 1, 1));
@@ -43,6 +44,7 @@ public class DrawingFrame extends JFrame {
 		toolboxPanel.add(jbLine);
 		toolboxPanel.add(jbCircle);
 		toolboxPanel.add(jbRectangle);
+		toolboxPanel.add(jbSelection);
 		toolboxPadding.add(toolboxPanel);
 
 		add(toolboxPadding, BorderLayout.NORTH);
@@ -68,7 +70,7 @@ public class DrawingFrame extends JFrame {
 					setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 			}
 		});
-		
+
 		setSize(500, 500);
 		setVisible(true);
 	}
@@ -79,11 +81,16 @@ public class DrawingFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getActionCommand().equals("Clear")) {
 				canvas.clearDrawing();
+			} else if (e.getActionCommand().equals("Select")) {
+				canvas.setSelectionMode(true);
 			} else if (e.getActionCommand().equals("Line")) {
+				canvas.setSelectionMode(false);
 				canvas.setCurrentShapeType(0);
 			} else if (e.getActionCommand().equals("Circle")) {
+				canvas.setSelectionMode(false);
 				canvas.setCurrentShapeType(1);
 			} else if (e.getActionCommand().equals("Rectangle")) {
+				canvas.setSelectionMode(false);
 				canvas.setCurrentShapeType(2);
 			}
 		}
