@@ -84,7 +84,7 @@ public abstract class DrawingObject {
 		y2 += deltaY;
 	}
 	
-	abstract public void draw(Graphics g);
+	public abstract void draw(Graphics g);
 	abstract public boolean intersect(int mouseX, int mouseY);
 	public abstract void setFixedXY();
 }

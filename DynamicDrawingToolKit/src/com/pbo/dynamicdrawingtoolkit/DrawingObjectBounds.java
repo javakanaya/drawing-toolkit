@@ -36,8 +36,6 @@ public abstract class DrawingObjectBounds extends DrawingObject {
 			setY1(getY2());
 			setY2(temp);
 		}
-//		System.out.println(getX1() + " " + getY1());
-//		System.out.println(getX2() + " " + getY2());
 	}
 	
 

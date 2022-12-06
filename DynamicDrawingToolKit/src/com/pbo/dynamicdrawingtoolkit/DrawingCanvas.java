@@ -77,7 +77,6 @@ public class DrawingCanvas extends JPanel {
 					if (shape != null && shape.intersect(prevX, prevY)) {
 						currentShapeObject = shape;
 						myShapes.remove(shape);
-						System.out.println("detected");
 						repaint();
 						break;
 					}
